@@ -1,48 +1,77 @@
-import User from '../models/user.model.js'
+import User from '../models/user.model.js';
 
-export const getUsers = async (req,res,next) => {
-    try{
-        const users = await User.find();
+export const getUsers = async (req, res, next) => {
+    try {
+        const users = await User.find().select('-password');
         res.status(200).json({
-            success:true,
-            data:users,
-        })
-    }catch(error){
-       next(error); 
-    }
-}
-
-export const getUser = async (req,res,next) => {
-    try{
-        const user = await User.findById(req.params.id).select('-password');
-        res.status(200).json({
-            success:true,
-            data:user,
+            success: true,
+            data: users,
         });
-        if(!user){
-             const error = new Error("User not found");
-             error.statusCode = 404;
-             throw error;
-        }
-    }catch(error){
-       
-       next(error); 
+    } catch (error) {
+        next(error);
     }
-}
+};
 
-export const postUser = async (req,res,next)=>{
+export const getUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id).select('-password');
+        if (!user) {
+            const error = new Error("User not found");
+            error.statusCode = 404;
+            throw error;
+        }
+        res.status(200).json({
+            success: true,
+            data: user,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const postUser = async (req, res, next) => {
     const user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
-    })
-    try{
-        const a1 = await user.save();
-        res.json(a1);
-    }catch(error){
+        password: req.body.password,
+    });
+    try {
+        const savedUser = await user.save();
+        res.status(201).json({
+            success: true,
+            data: savedUser,
+        });
+    } catch (error) {
         next(error);
     }
-}
+};
+
+export const updateUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndUpdate(
+            req.params.id,
+            {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+            },
+            { new: true }
+        );
+
+        if (!user) {
+            const error = new Error("User not found");
+            error.statusCode = 404;
+            throw error;
+        }
+
+        res.status(200).json({
+            success: true,
+            data: user,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
 
 export const deleteUser = async (req, res, next) => {
     try {

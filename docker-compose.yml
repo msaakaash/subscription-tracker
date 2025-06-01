@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  backend:
+    build: .
+    container_name: node_backend
+    ports:
+      - "5501:5501"
+    environment:
+      - PORT=5501
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb+srv://msaakaash:Aakaash%4014@cluster0.dthdisr.mongodb.net/subscriptionDB?retryWrites=true&w=majority&appName=Cluster0
+    volumes:
+      - .:/app
+    restart: always

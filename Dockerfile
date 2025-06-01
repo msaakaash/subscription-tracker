@@ -1,0 +1,20 @@
+# USE NODE.js BASE IMAGE
+
+FROM node:20 
+
+# SET WORKING DIRECTORY 
+
+WORKDIR /app
+
+# INSTALL DEPENDENCIES
+COPY package*.json ./
+RUN npm install 
+
+# COPY APP FILES
+COPY . .
+
+# EXPOSE PORT 
+EXPOSE 5501
+
+# START THE APP
+CMD ["npm","start"]
