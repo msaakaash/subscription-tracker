@@ -1,10 +1,19 @@
 import Subscription from '../models/subscription.model.js';
+import { workflowClient } from '../config/upstash.js';
+
+// Define SERVER_URL, for example from environment variables
+// eslint-disable-next-line no-undef
+const SERVER_URL = process.env.SERVER_URL;
 
 export const createSubscription = async (req, res,next) => {
     try{
         const subscription = await Subscription.create({
             ...req.body,
             user:req.user._id
+        });
+
+        await workflowClient.trigger({
+            url: `${SERVER_URL}/api/v1/workflows/subscription/reminder`,
         });
         res.status(201).json({
             success: true,
