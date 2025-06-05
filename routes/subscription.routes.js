@@ -6,7 +6,7 @@ const subscriptionRouter = Router();
 
 /**
  * @swagger
- * /api/subscriptions:
+ * /api/v1/subscriptions:
  *   post:
  *     summary: Create a new subscription
  *     tags:
@@ -111,7 +111,7 @@ subscriptionRouter.get('/',getAllSubscriptions);
 
 /**
  * @swagger
- * /api/subscriptions/{subscriptionId}:
+ * /api/v1/subscriptions/{subscriptionId}:
  *   get:
  *     summary: Get a subscription by ID
  *     tags:
@@ -181,7 +181,7 @@ subscriptionRouter.get('/:id',authorize,getSubscriptionById);
 
 /**
  * @swagger
- * /api/subscriptions/user/{id}:
+ * /api/v1/subscriptions/user/{id}:
  *   get:
  *     summary: Get all subscriptions for a specific user
  *     tags:
@@ -251,7 +251,7 @@ subscriptionRouter.get('/user/:id',authorize,getUserSubscriptions);
 
 /**
  * @swagger
- * /subscriptions/{id}:
+ * /api/v1/subscriptions/{id}:
  *   put:
  *     summary: Update a subscription
  *     description: Updates a subscription by its ID. Requires authentication.
@@ -322,7 +322,7 @@ subscriptionRouter.put('/:id',authorize,updateSubscription);
 
 /**
  * @swagger
- * /subscriptions/{id}:
+ * /api/v1/subscriptions/{id}:
  *   delete:
  *     summary: Delete a subscription
  *     description: Deletes a subscription by its ID. Requires authentication.
@@ -359,7 +359,7 @@ subscriptionRouter.delete('/:id',authorize,deleteSubscription);
 
 /**
  * @swagger
- * /subscriptions/{id}/cancel:
+ * /api/v1/subscriptions/{id}/cancel:
  *   post:
  *     summary: Cancel a subscription
  *     description: Cancels an active subscription by setting its `isActive` flag to false. Only the subscription owner can cancel.
