@@ -82,3 +82,21 @@ The API is documented using **Swagger** for ease of use and clarity.
 
 ![Swagger Docs Screenshot](./docs/swagger-ui.png)
 
+
+
+## Contributing
+Contributions are welcome! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
+
+## Code of Conduct
+Please read our [Code of Conduct](docs/CODE_OF_CONDUCT.md) before contributing to this project.
+
+## Security
+If you discover a vulnerability, please refer to our [Security Policy](docs/SECURITY.md) for instructions on how to report it responsibly.
+
+## License  
+This project is licensed under the [MIT LICENSE](LICENSE).
+
+
+## Author
+
+[**Aakaash M S**](https://github.com/msaakaash)
